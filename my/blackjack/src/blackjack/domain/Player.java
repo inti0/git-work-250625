@@ -5,7 +5,6 @@ import java.util.List;
 public class Player {
 
     private static final int ACE_MORE_OPTION_THRESHOLD = 11;
-
     private final String name;
     private final List<Card> cards;
 
