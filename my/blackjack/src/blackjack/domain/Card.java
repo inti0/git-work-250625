@@ -29,4 +29,8 @@ public record Card(Rank rank, Suit suit) {
     public int getValue() {
         return this.rank.getValue();
     }
+
+    public String getSuitName() {
+        return this.suit.getName();
+    }
 }

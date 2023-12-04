@@ -15,8 +15,8 @@ public class Player {
         this.cards = new ArrayList<>(cards);
     }
 
-    public void hit(Card card) {
-        cards.add(card);
+    public boolean hit(Card card) {
+        return cards.add(card);
     }
 
     public int calculateScore() {
@@ -29,6 +29,10 @@ public class Player {
         }
 
         return score;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public List<Card> getCards() {

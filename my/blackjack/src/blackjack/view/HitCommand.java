@@ -8,7 +8,7 @@ public enum HitCommand {
     NO("n"),
     ;
 
-    private String code;
+    private final String code;
 
     HitCommand(String code) {
         this.code = code;

@@ -16,8 +16,8 @@ public enum Rank {
     KING("K", 10),
     ;
 
-    private String initial;
-    private int value;
+    private final String initial;
+    private final int value;
     private int otherValue;
 
     Rank(String initial, int value) {

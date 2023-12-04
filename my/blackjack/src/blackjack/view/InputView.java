@@ -15,7 +15,7 @@ public class InputView {
     }
 
     public HitCommand readHitCommand(String playerName) {
-        System.out.println("%s는 한장의 카드를 더 받겠습니까?(예는 y, 아니오는 n))".formatted(playerName));
+        System.out.printf("%s는 한장의 카드를 더 받겠습니까?(예는 y, 아니오는 n))%n", playerName);
         String input = scanner.nextLine();
         return HitCommand.findBy(input);
     }

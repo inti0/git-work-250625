@@ -8,7 +8,7 @@ public enum Suit {
     SPADE("스페이드"),
     ;
 
-    private String name;
+    private final String name;
 
     Suit(String name) {
         this.name = name;

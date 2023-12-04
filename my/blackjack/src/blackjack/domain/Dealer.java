@@ -11,9 +11,10 @@ public class Dealer extends Player{
     }
 
     @Override
-    public void hit(Card card) {
+    public boolean hit(Card card) {
         if (super.calculateScore() >= DEALER_HIT_THRESHOLD) {
-            super.hit(card);
+            return super.hit(card);
         }
+        return false;
     }
 }
