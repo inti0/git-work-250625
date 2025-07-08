@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useRef } from "react"
 
 function App() {
 
@@ -20,12 +20,21 @@ function App() {
     }
   ]
 
+  const idRecorder = useRef(4);
+
   const [todos, setTodos] = useState(initialState);
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    const formValue = e.target.elements.todo.value;
+    const newTodos = [{ id: idRecorder.current++, value: formValue, completed: false}, ...todos];
+    setTodos(newTodos);
+  }
 
   return (
     <>
-      <form>
-        <input type="text" />
+      <form onSubmit={handleOnSubmit}>
+        <input type="text" name="todo"/>
         <button>등록</button>
       </form>
       <TodoList todos={todos} />
@@ -36,11 +45,11 @@ function App() {
 function TodoList({ todos }) {
   return (
     <ul>
-      {todos.map((todo) => {
+      {todos.map((todo) => (
         <li key={todo.id}>
           {todo.value}
         </li>
-      })}
+      ))}
     </ul>
   );
 }
