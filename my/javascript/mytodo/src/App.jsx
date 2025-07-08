@@ -23,18 +23,30 @@ function App() {
   const idRecorder = useRef(4);
 
   const [todos, setTodos] = useState(initialState);
+  const [inputValue, setInputValue] = useState('');
 
+  const handleInputChange = (e) => {
+    setInputValue(e.target.value);
+  }
+
+  //form TODO 등록
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    const formValue = e.target.elements.todo.value;
-    const newTodos = [{ id: idRecorder.current++, value: formValue, completed: false}, ...todos];
+    const formValue = inputValue;
+    const newTodos = [{ id: idRecorder.current++, value: formValue, completed: false }, ...todos];
     setTodos(newTodos);
+    setInputValue('');
   }
 
   return (
     <>
       <form onSubmit={handleOnSubmit}>
-        <input type="text" name="todo"/>
+        <input
+          type="text"
+          name="todo"
+          value={inputValue}
+          onChange={handleInputChange}
+          placeholder="새로운 할 일을 입력하세요" />
         <button>등록</button>
       </form>
       <TodoList todos={todos} />
