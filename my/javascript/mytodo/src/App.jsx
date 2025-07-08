@@ -38,28 +38,33 @@ function App() {
     setInputValue('');
   }
 
+  const removeTodo = (id) => {
+    const filtered = todos.filter(todo => todo.id !== id);
+    setTodos(filtered);    
+  }
+
   return (
     <>
       <form onSubmit={handleOnSubmit}>
         <input
           type="text"
-          name="todo"
           value={inputValue}
           onChange={handleInputChange}
           placeholder="새로운 할 일을 입력하세요" />
         <button>등록</button>
       </form>
-      <TodoList todos={todos} />
+      <TodoList todos={todos} removeTodo={removeTodo}/>
     </>
   )
 }
 
-function TodoList({ todos }) {
+function TodoList({ todos, removeTodo }) {
   return (
     <ul>
       {todos.map((todo) => (
         <li key={todo.id}>
           {todo.value}
+          <button onClick={() => removeTodo(todo.id)} type="checkbox" checked="false"> X </button>
         </li>
       ))}
     </ul>
