@@ -40,7 +40,14 @@ function App() {
 
   const removeTodo = (id) => {
     const filtered = todos.filter(todo => todo.id !== id);
-    setTodos(filtered);    
+    setTodos(filtered);
+  }
+
+  const toggleTodo = (id) => {
+    const updated = todos.map(todo =>
+      todo.id === id ? { ...todo, completed: !todo.completed } : todo
+    );
+    setTodos(updated);
   }
 
   return (
@@ -53,18 +60,19 @@ function App() {
           placeholder="새로운 할 일을 입력하세요" />
         <button>등록</button>
       </form>
-      <TodoList todos={todos} removeTodo={removeTodo}/>
+      <TodoList todos={todos} removeTodo={removeTodo} toggleTodo={toggleTodo} />
     </>
   )
 }
 
-function TodoList({ todos, removeTodo }) {
+function TodoList({ todos, removeTodo, toggleTodo }) {
   return (
     <ul>
       {todos.map((todo) => (
         <li key={todo.id}>
+          <input type="checkbox" checked={todo.completed} onClick={() => toggleTodo(todo.id)}></input>
           {todo.value}
-          <button onClick={() => removeTodo(todo.id)} type="checkbox" checked="false"> X </button>
+          <button onClick={() => removeTodo(todo.id)}> X </button>
         </li>
       ))}
     </ul>
