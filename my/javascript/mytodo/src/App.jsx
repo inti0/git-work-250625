@@ -1,7 +1,7 @@
 import { useState, useRef } from "react"
+import TodoSubmitForm from "./component/TodoSubmitForm";
 
 function App() {
-
   const initialState = [
     {
       id: 1,
@@ -21,22 +21,7 @@ function App() {
   ]
 
   const idRecorder = useRef(4);
-
   const [todos, setTodos] = useState(initialState);
-  const [inputValue, setInputValue] = useState('');
-
-  const handleInputChange = (e) => {
-    setInputValue(e.target.value);
-  }
-
-  //form TODO 등록
-  const handleOnSubmit = (e) => {
-    e.preventDefault();
-    const formValue = inputValue;
-    const newTodos = [{ id: idRecorder.current++, value: formValue, completed: false }, ...todos];
-    setTodos(newTodos);
-    setInputValue('');
-  }
 
   const removeTodo = (id) => {
     const filtered = todos.filter(todo => todo.id !== id);
@@ -50,16 +35,14 @@ function App() {
     setTodos(updated);
   }
 
+  const addTodo = (value) => {
+    const newTodos = [{ id: idRecorder.current++, value: value, completed: false }, ...todos];
+    setTodos(newTodos);
+  }
+
   return (
     <>
-      <form onSubmit={handleOnSubmit}>
-        <input
-          type="text"
-          value={inputValue}
-          onChange={handleInputChange}
-          placeholder="새로운 할 일을 입력하세요" />
-        <button>등록</button>
-      </form>
+      <TodoSubmitForm addTodo={addTodo} />
       <TodoList todos={todos} removeTodo={removeTodo} toggleTodo={toggleTodo} />
     </>
   )
@@ -70,7 +53,7 @@ function TodoList({ todos, removeTodo, toggleTodo }) {
     <ul>
       {todos.map((todo) => (
         <li key={todo.id}>
-          <input type="checkbox" checked={todo.completed} onClick={() => toggleTodo(todo.id)}></input>
+          <input type="checkbox" checked={todo.completed} onChange={() => toggleTodo(todo.id)}></input>
           {todo.value}
           <button onClick={() => removeTodo(todo.id)}> X </button>
         </li>
@@ -78,5 +61,8 @@ function TodoList({ todos, removeTodo, toggleTodo }) {
     </ul>
   );
 }
+
+
+
 
 export default App;
