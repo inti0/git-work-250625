@@ -1,5 +1,6 @@
 import { useState, useRef } from "react"
 import TodoSubmitForm from "./component/TodoSubmitForm";
+import TodoList from "./component/TodoList";
 
 function App() {
   const initialState = [
@@ -47,22 +48,5 @@ function App() {
     </>
   )
 }
-
-function TodoList({ todos, removeTodo, toggleTodo }) {
-  return (
-    <ul>
-      {todos.map((todo) => (
-        <li key={todo.id}>
-          <input type="checkbox" checked={todo.completed} onChange={() => toggleTodo(todo.id)}></input>
-          {todo.value}
-          <button onClick={() => removeTodo(todo.id)}> X </button>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
-
-
 
 export default App;
